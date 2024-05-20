@@ -1,257 +1,199 @@
-# 1.SIMULATION AND SYNTHESIS OF LOGIC GATES,ADDERS,SUBTRACTORS
-# AIM: 
-To simulate and synthesis Logic Gates,Adders and Subtractor using Vivado 2023.1
+EXP-1
 
-# APPARATUS REQUIRED: 
-Vivado 2023.1
+Date:
 
-# PROCEDURE: 
-1. Open Vivado: Launch Xilinx Vivado software on your computer.
+                     SIMULATION OF LOGIC GATES ,ADDERS AND SUBTRACTORS
+                                               
+AIM:
+To simulate Logic Gates ,Adders and Subtractors using Vivado 2023.2.
 
-2. Create a New Project: Click on "Create Project" from the welcome page or navigate through "File" > "Project" > "New".
-
-3. Project Settings: Follow the prompts to set up your project. Specify the project name, location, and select RTL project type.
-
-4. Add Design Files: Add your Verilog design files to the project. You can do this by right-clicking on "Design Sources" in the Sources window, then selecting "Add Sources". Choose your Verilog files from the file browser.
-
-5. Specify Simulation Settings: Go to "Simulation" > "Simulation Settings". Choose your simulation language (Verilog in this case) and simulation tool (Vivado Simulator).
-
-6. Run Simulation: Go to "Flow" > "Run Simulation" > "Run Behavioral Simulation". This will launch the Vivado Simulator and compile your design for simulation.
-
-7. Set Simulation Time: In the Vivado Simulator window, set the simulation time if it's not set automatically. This determines how long the simulation will run.
-
-8. Run Simulation: Start the simulation by clicking on the "Run" button in the simulation window.
-
-9. View Results: After the simulation completes, you can view waveforms, debug signals, and analyze the behavior of your design
+APPARATUS REQUIRED:
+VIVADO 2023.2
 
 
-Logic Diagram :
+PROCEDURE:
 
-Logic Gates:
+STEP:1 Launch the Vivado 2023.2 software.
+
+STEP:2 Click on “create project ” from the starting page of vivado.
+
+STEP:3 Choose the design entry method:RTL(verilog/VHDL).
+
+STEP:4 Crete design source and give name to it and click finish.
+
+STEP:5 Write the verilog code and check the syntax.
+
+STEP:6 Click “run simulation” in the navigator window and click “Run behavioral simulation”.
+
+STEP:7 Verify the output in the simulation window.
+
+LOGIC GATES LOGIC DIAGRAM:
+
 ![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/ee17970c-3ac9-4603-881b-88e2825f41a4)
 
-
-Half Adder:
-
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/0e1ecb96-0c25-4556-832b-aeeedfdfe7b9)
-
-
-Full adder:
-
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/9bb3964c-438f-469d-a3de-c1cca6f323fb)
-
-
-Half Subtractor:
-
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/731470b7-eb4e-49f8-8bb7-2994052a7184)
-
-
-
-Full Subtractor:
-
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/d66f874b-c1f2-44b3-a035-7149b56430c1)
-
-
-
-8 Bit Ripple Carry Adder
-
-![image](https://github.com/navaneethans/VLSI-LAB-EXPERIMENTS/assets/6987778/7385a408-40a5-4203-8050-b72818622d79)
-
-
-# HALF ADDER
-VERILOG CODE
-~~~
-module half_adder(Sum,carry,a,b);
-input a,b;
-output Sum,carry;
-assign Sum = a ^ b;
-assign carry = a & b;
-endmodule
-~~~
-
-
-OUTPUT:
-
-<img width="745" alt="2024-03-15 (3)" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/6c4f319b-6117-4f80-ab75-0828a105d2a5">
-<img width="962" alt="2024-04-06" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/312df9ed-ef21-424f-a4d7-8d81a4c64eae">
-
-# HALF SUBTRACTOR
-
-VERILOG CODE:
-~~~
-module half_sub(Diff,Borrow,a,b);
-input a,b;
-output Diff,Borrow;
-wire w1;
-not(w1,a);
-xor(Diff,a,b);
-and(Borrow,b,w1);
-endmodule
-~~~
-
-OUTPUT:
-
-<img width="826" alt="2024-04-07" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/fff6face-f63a-4172-b5a9-6a95022deab8">
-<img width="962" alt="2024-03-04 (3)" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/50e5c3d6-8f3c-4712-8fe2-fa0114dae014">
-
-# FULL ADDER
-VERILOG CODE:
-~~~
-module fulladder(sum,cout,a,b,c);
-input a,b,c;
-output sum,cout;
-wire w1,w2,w3,w4,w5;
-xor x1(w1,a,b);
-xor x2(sum,w1,c);
-and a1(w2,a,b);
-and a2(w3,b,c);
-and a3(w4,a,c);
-or o1(w5,c1,c2);
-or o2(cout,w5,c3);
-endmodule
-~~~
-
-OUTPUT:
-
-<img width="962" alt="2024-03-15 (4)" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/0f99f497-5145-41cb-971d-0b96a339897b">
-<img width="962" alt="2024-04-06 (1)" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/19d4ec03-ae75-493d-b998-798c356a1069">
-
-# FULL SUBTRACTOR
-VERILOG CODE:
-~~~
-module full_sub(borrow,diff,a,b,c);
-output borrow,diff;
-input a,b,c;
-wire w1,w4,w5,w6;
-xor (diff,a,b,c);
-not n1(w1,a);
-and a1(w4,w1,b);
-and a2(w5,w1,c);
-and a3(w6,b,c);
-or o1(borrow,w4,w5,w6);
-endmodule
-~~~
-
-OUTPUT:
-
-<img width="692" alt="2024-04-02 " src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/cb986e1c-8a11-4bc0-906d-d4a5fd6a3682">
-<img width="962" alt="2024-04-06 (3)" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/e6dc405d-a723-483f-88f3-1132dd037dae">
-
-# LOGIC GATES
-VERILOG CODE:
-~~~
-module logicgates(a,b,andgate,orgate,xorgate,nandgate,norgate,xnorgate,notgate);
-input a,b;
+ VERILOG CODE
+```
+module logicgate (a,b,andgate,orgate,xorgate,nandgate,norgate,xnorgate,notgate);
+input a,b;  
 output andgate,orgate,xorgate,nandgate,norgate,xnorgate,notgate;
 and(andgate,a,b);
 or(orgate,a,b);
 xor(xorgate,a,b);
-nand(nandgate,a,b);  
+nand(nandgate,a,b); 
 nor(norgate,a,b);
 xnor(xnorgate,a,b);
 not(notgate,a);
 endmodule
-~~~
+```
+OUTPUT WAVEFORM
 
-OUTPUT:
+![331342725-06f72e07-8cb7-4e6d-8e2c-990099b5f11d](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/1dc5e80a-a438-4238-bbad-3dc2c359d995)
 
-<img width="822" alt="2024-03-15 (5)" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/7b1685d4-2018-43e2-aac4-96684266e0c6">
-<img width="962" alt="2024-04-06 (4)" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/32d0f8af-5dea-47fd-ab65-e64aaa0d03ee">
+HALF ADDER LOGIC DIAGRAM
 
-# 4-BIT RIPPLE CARRY ADDER
-VERILOG CODE:
-~~~
-module rippe_adder(S, Cout, X, Y,Cin);
-input [3:0] X, Y;
-input Cin;
-output [3:0] S;
-output Cout;
-wire w1, w2, w3;
-fulladder u1(S[0], w1,X[0], Y[0], Cin);
-fulladder u2(S[1], w2,X[1], Y[1], w1);
-fulladder u3(S[2], w3,X[2], Y[2], w2);
-fulladder u4(S[3], Cout, X[3], Y[3], w3);
+![331342703-4a0e5e6b-09e9-446e-898e-95cb25188dd9](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/94f7fc2a-9cc1-48c1-a6fe-89f8b169c594)
+
+VERILOG CODE
+```
+module half_adder(a,b,sum,carry);
+
+input a,b;
+
+output sum,carry;
+
+xor g1(sum,a,b);
+
+and g2(carry,a,b);
+
 endmodule
+```
+OUTPUT WAVEFORM
 
-module fulladder(S, Co, X, Y, Ci);
-input X, Y, Ci;
-output S, Co;
+![331342650-ce7fff0a-0336-4f26-a50c-30f7546ffa4e](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/cc5977a8-a641-44be-a45c-60d5a1d16fd5)
+
+FULL ADDER LOGIC DIAGRAM
+
+![331342621-6d104c09-f1dc-44c2-9a0b-74dada9d223d](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/d63fd6a8-4ea4-407b-8f52-dd8414660634)
+
+VERILOG CODE
+```
+module fulladder(a,b,c,sum,carry);
+
+input a,b,c;
+
+output sum,carry;
+
 wire w1,w2,w3;
-xor G1(w1, X, Y);
-xor G2(S, w1, Ci);
-and G3(w2, w1, Ci);
-and G4(w3, X, Y);
-or G5(Co, w2, w3);
-endmodule
-~~~
-OUTPUT:
 
-<img width="962" alt="2024-03-15" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/deb0ca19-1fc3-4a6c-9168-1c59e4105e6d">
-<img width="962" alt="2024-04-06 (5)" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/270b38f9-6725-4118-8ef8-98ca78e7be87">
+xor(w1,a,b);
 
-# 8-BIT RIPPLE CARRY ADDER
-VERILOG CODE:
-~~~
-module rippe_adder(S, Cout, X, Y,Cin);
-input [7:0] X, Y;// Two 4-bit inputs
-input Cin;
-output [7:0] S;
-output Cout;
-wire w1, w2, w3, w4, w5, w6, w7;
- // instantiating 8 1-bit full adders in Verilog
-fulladder u1(S[0], w1,X[0], Y[0], Cin);
-fulladder u2(S[1], w2,X[1], Y[1], w1);
-fulladder u3(S[2], w3,X[2], Y[2], w2);
-fulladder u4(S[3], w4,X[3], Y[3], w3);
-fulladder u5(S[4], w5,X[4], Y[4], w4);
-fulladder u6(S[5], w6,X[5], Y[5], w5);
-fulladder u7(S[6], w7,X[6], Y[6], w6);
-fulladder u8(S[7], Cout,X[7], Y[7], w7);
+xor(sum,w1,c);
+
+and(w2,w1,c);
+
+and(w3,a,b);
+
+or(carry,w2,w3);
+
 endmodule
-module fulladder(S, Co, X, Y, Ci);
-input X, Y, Ci;
-output S, Co;
+```
+OUTPUT WAVEFORM
+
+![331342586-47929d84-382f-47fa-ba5d-87f3822fe301](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/942f02d4-7d08-4afc-a387-f7e297d65841)
+
+HALF SUBTRACTOR LOGIC DIAGRAM
+![331342566-1fb45309-84f4-4293-931c-f70dde701592](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/7ba69920-2eb4-48ee-ab02-b09250f4422f)
+
+
+VERILOG CODE
+```
+module halfsub(a,b,diff,borrow);
+
+input a,b;
+
+output diff,borrow;
+
+xor(diff,a,b);
+
+and(borrow,~a,b);
+
+endmodule
+```
+OUTPUT WAVE
+
+![331342526-07e60246-60a4-4c39-abad-a7e2435bd9c6](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/9f6d3247-62b7-48b3-bd64-523a62861f32)
+FORM
+
+
+FULL SUBTRACTOR LOGIC DIAGRAM
+
+![331342490-2c64f656-51b7-4201-9f64-226fb3f8ffc2](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/63495b96-7ba7-4303-8433-21482f32d75a)
+
+
+VERILOG CODE
+```
+module fs(a,b,bin,d,bout);
+
+input a,b,bin;
+
+output d,bout;
+
 wire w1,w2,w3;
-  //Structural code for one bit full adder
-xor G1(w1, X, Y);
-xor G2(S, w1, Ci);
-and G3(w2, w1, Ci);
-and G4(w3, X, Y);
-or G5(Co, w2, w3);
+
+xor(w1,a,b);
+
+xor(d,w1,bin);
+
+and(w2,~a,b);
+
+and(w3,~w1,bin);
+
+or(bout,w3,w2);
+
 endmodule
-~~~
+```
+OUTPUT WAVEFORM
 
-OUTPUT:
+![331342451-fdc2ca0a-34ac-4f3c-bbab-3adbc9ca953e](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/8c298efc-9db5-4777-be55-a7e8ac97cc7d)
 
-<img width="591" alt="2024-04-06 (7)" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/d6d5b77b-173d-4a11-a943-2bd046d33aa8">
-<img width="962" alt="2024-04-06 (6)" src="https://github.com/21004601/VLSI-LAB-EXP-1/assets/146088220/43b8e889-ac6a-4f12-ae23-4309ee538b8c">
+RIPPLE CARRY ADDER LOGIC DIAGRAM
+![331342419-c7b76933-7856-4d3e-95b3-dda1cc9b0438](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/c9ecbcee-ba64-49b3-9b8f-f3eb26a8d323)
+
+
+VERILOG CODE
+```
+module fulladder(a,b,c,sum,carry);
+input a,b,c;
+output sum,carry;
+wire w1,w2,w3;
+xor(w1,a,b);
+xor(sum,w1,c);
+and(w2,w1,c);
+and(w3,a,b);
+or(carry,w2,w3);
+endmodule
+
+module rca_8bit(a,b,cin,s,cout);
+input [7:0]a,b;
+input cin;
+output [7:0]s;
+output cout;
+wire [7:1]w;
+fulladder f1(a[0], b[0], cin, s[0], w[1]);
+fulladder f2(a[1], b[1], w[1], s[1], w[2]);
+fulladder f3(a[2], b[2], w[2], s[2], w[3]);
+fulladder f4(a[3], b[3], w[3], s[3], w[4]);
+fulladder f5(a[4], b[4], w[4], s[4], w[5]);
+fulladder f6(a[5], b[5], w[5], s[5], w[6]);
+fulladder f7(a[6], b[6], w[6], s[6], w[7]);
+fulladder f8(a[7], b[7], w[7], s[7], cout);
+endmodule
+```
+OUTPUT WAVEFORM
+
+![331342384-ea074c85-bba4-4a51-9dcc-92bc3c0b8651](https://github.com/Udaychaitanya011/VLSI-LAB-EXP-1/assets/161430397/90430024-8e3b-4c43-95a0-3569f1dc30e2)
+
 
 RESULT:
-THUS THE LOGIC GATES,ADDERS,SUBTRACTORS VERILOG CODE IS SIMULATED  USING VIVADO 2023.1 AND OUTPUT VERIFIED SUCCESSFULLY
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+       simulation of Logic Gates ,Adders and Subtractors using Vivado 2023.2 is verified.
